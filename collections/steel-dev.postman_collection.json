@@ -1,0 +1,439 @@
+{
+  "item": [
+    {
+      "id": "f1a0c2d3-0001-4a00-9000-000000000001",
+      "name": "Sessions",
+      "description": {
+        "content": "Launch, inspect, and release cloud browser sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000101",
+          "name": "Create a browser session",
+          "request": {
+            "name": "Create a browser session",
+            "description": {
+              "content": "Launch a new cloud browser session; returns websocketUrl (CDP), debugUrl, and sessionViewerUrl.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["v1", "sessions"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proxyUrl\": \"<string>\",\n  \"blockAds\": true,\n  \"solveCaptcha\": false,\n  \"timezone\": \"<string>\",\n  \"dimensions\": { \"width\": 1280, \"height\": 800 }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000102",
+          "name": "List sessions",
+          "request": {
+            "name": "List sessions",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000103",
+          "name": "Get session details",
+          "request": {
+            "name": "Get session details",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000104",
+          "name": "Get session context",
+          "request": {
+            "name": "Get session context",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "context"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000105",
+          "name": "Get session live details",
+          "request": {
+            "name": "Get session live details",
+            "description": {
+              "content": "Returns live viewer URLs, the CDP websocketUrl, open pages, and browser state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "live-details"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000106",
+          "name": "Release a session",
+          "request": {
+            "name": "Release a session",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "release"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0001-4a00-9000-000000000107",
+          "name": "Release all sessions",
+          "request": {
+            "name": "Release all sessions",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", "release"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f1a0c2d3-0002-4a00-9000-000000000002",
+      "name": "Session Actions",
+      "description": {
+        "content": "Scrape, screenshot, and PDF the page in a running session.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a0c2d3-0002-4a00-9000-000000000201",
+          "name": "Scrape current session page",
+          "request": {
+            "name": "Scrape current session page",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", "scrape"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"format\": [\"markdown\"],\n  \"screenshot\": false,\n  \"pdf\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0002-4a00-9000-000000000202",
+          "name": "Screenshot current session page",
+          "request": {
+            "name": "Screenshot current session page",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", "screenshot"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "image/png" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullPage\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0002-4a00-9000-000000000203",
+          "name": "PDF of current session page",
+          "request": {
+            "name": "PDF of current session page",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", "pdf"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/pdf" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f1a0c2d3-0003-4a00-9000-000000000003",
+      "name": "Quick Actions",
+      "description": {
+        "content": "Stateless one-off scrape, screenshot, PDF, and search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a0c2d3-0003-4a00-9000-000000000301",
+          "name": "Scrape a URL",
+          "request": {
+            "name": "Scrape a URL",
+            "description": {},
+            "url": {
+              "path": ["v1", "scrape"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\",\n  \"format\": [\"markdown\"],\n  \"screenshot\": false,\n  \"pdf\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0003-4a00-9000-000000000302",
+          "name": "Take a screenshot of a URL",
+          "request": {
+            "name": "Take a screenshot of a URL",
+            "description": {},
+            "url": {
+              "path": ["v1", "screenshot"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "image/png" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\",\n  \"fullPage\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0003-4a00-9000-000000000303",
+          "name": "Get the PDF of a URL",
+          "request": {
+            "name": "Get the PDF of a URL",
+            "description": {},
+            "url": {
+              "path": ["v1", "pdf"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/pdf" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0003-4a00-9000-000000000304",
+          "name": "Search the web",
+          "request": {
+            "name": "Search the web",
+            "description": {},
+            "url": {
+              "path": ["v1", "search"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"open source browser api\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f1a0c2d3-0004-4a00-9000-000000000004",
+      "name": "Files",
+      "description": {
+        "content": "Manage files inside a session's browser context.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a0c2d3-0004-4a00-9000-000000000401",
+          "name": "List session files",
+          "request": {
+            "name": "List session files",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "files"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0004-4a00-9000-000000000402",
+          "name": "Upload a file to a session",
+          "request": {
+            "name": "Upload a file to a session",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "files"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "path", "type": "text", "value": "<string>" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a0c2d3-0004-4a00-9000-000000000403",
+          "name": "Delete all session files",
+          "request": {
+            "name": "Delete all session files",
+            "description": {},
+            "url": {
+              "path": ["v1", "sessions", ":sessionId", "files"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "sessionId", "value": "<string>" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "DELETE"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.steel.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Steel-Api-Key" },
+      { "key": "value", "value": "{{steelApiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7e2c1d4-steel-4a00-9000-000000000000",
+    "name": "Steel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Steel is the open-source browser API for AI agents and apps. REST API under https://api.steel.dev/v1 with the Steel-Api-Key header.\n\nContact Support:\n URL: https://docs.steel.dev",
+      "type": "text/plain"
+    }
+  }
+}

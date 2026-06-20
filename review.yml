@@ -1,0 +1,91 @@
+aid: steel-dev
+name: Steel
+review:
+  question: Does Steel expose a documented public WebSocket API?
+  answer: true
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Steel exposes a real, documented WebSocket surface: a per-session Chrome
+    DevTools Protocol (CDP) endpoint returned as `websocketUrl` (wss://) from
+    the Sessions API. However, this WebSocket speaks the Chrome DevTools
+    Protocol, a vendor JSON-RPC wire protocol designed to be driven by
+    Playwright / Puppeteer / Selenium client libraries rather than a
+    Steel-authored, channel-and-message-documented API. Steel does not publish
+    a message/channel catalog for this socket; the contract is CDP itself. An
+    AsyncAPI document was therefore NOT authored, because faithfully modeling
+    it would mean re-modeling the entire Chrome DevTools Protocol, which is not
+    a Steel interface. The WebSocket connect surface is instead documented in
+    this review and surfaced as the steel-dev:steel-browser-connect-api entry
+    in apis.yml.
+findings:
+  summary: |
+    Steel publishes a documented public WebSocket surface, but it is a
+    transport for the Chrome DevTools Protocol rather than a bespoke Steel
+    message API. Every browser session created via POST /v1/sessions returns a
+    `websocketUrl` (wss://) which clients connect to with
+    browser.connect_over_cdp() (Playwright), puppeteer.connect() (Puppeteer),
+    or a Selenium grid binding. The rest of the Steel surface is REST/HTTPS
+    under https://api.steel.dev/v1 (self-hosted default http://localhost:3000/v1),
+    authenticated with the Steel-Api-Key header. Steel is open source under
+    Apache-2.0 (github.com/steel-dev/steel-browser); the same routes run
+    self-hosted.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.steel.dev/v1
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      note: >-
+        Per-session CDP WebSocket returned as session.websocketUrl. Speaks the
+        Chrome DevTools Protocol (JSON-RPC), driven by Playwright / Puppeteer /
+        Selenium. Documented as a connect target, not as a Steel-authored
+        channel/message catalog.
+      documented: true
+  endpointsConfirmedRest:
+    - POST   https://api.steel.dev/v1/sessions
+    - GET    https://api.steel.dev/v1/sessions
+    - GET    https://api.steel.dev/v1/sessions/{sessionId}
+    - GET    https://api.steel.dev/v1/sessions/{sessionId}/context
+    - GET    https://api.steel.dev/v1/sessions/{sessionId}/live-details
+    - POST   https://api.steel.dev/v1/sessions/{sessionId}/release
+    - POST   https://api.steel.dev/v1/sessions/release
+    - POST   https://api.steel.dev/v1/sessions/scrape
+    - POST   https://api.steel.dev/v1/sessions/screenshot
+    - POST   https://api.steel.dev/v1/sessions/pdf
+    - POST   https://api.steel.dev/v1/scrape
+    - POST   https://api.steel.dev/v1/screenshot
+    - POST   https://api.steel.dev/v1/pdf
+    - POST   https://api.steel.dev/v1/search
+    - GET    https://api.steel.dev/v1/sessions/{sessionId}/files
+    - POST   https://api.steel.dev/v1/sessions/{sessionId}/files
+    - DELETE https://api.steel.dev/v1/sessions/{sessionId}/files
+  websocketConfirmed:
+    - wss://connect.steel.dev session CDP endpoint (session.websocketUrl), connect via Playwright connect_over_cdp / Puppeteer connect / Selenium.
+sources:
+  - url: https://docs.steel.dev/api-reference
+    type: APIReference
+    note: REST endpoints under https://api.steel.dev/v1 with the Steel-Api-Key header.
+  - url: https://docs.steel.dev/overview/sessions-api
+    type: Documentation
+    note: Sessions return websocketUrl, debugUrl, sessionViewerUrl; live viewer documented.
+  - url: https://docs.steel.dev/overview/guides/connect-with-playwright
+    type: Documentation
+    note: Connect to the session CDP WebSocket with Playwright connect_over_cdp.
+  - url: https://github.com/steel-dev/steel-browser
+    type: SourceCode
+    note: Apache-2.0 open-source server; routes for sessions, scrape, screenshot, pdf, search, files, and CDP/Selenium connect.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    The documented WebSocket is a CDP transport, not a Steel-authored
+    message/channel API, so no AsyncAPI document was created. The CDP /
+    browser-connect surface is instead represented as a dedicated API entry
+    (steel-dev:steel-browser-connect-api) in apis.yml and documented in detail
+    in this review, with the OpenAPI noting websocketUrl on session responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Steel API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Steel-Api-Key",
+      "value": "{{steelApiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a browser session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"proxyUrl\": \"<string>\",\n  \"blockAds\": true,\n  \"solveCaptcha\": false,\n  \"timezone\": \"<string>\",\n  \"dimensions\": { \"width\": 1280, \"height\": 800 }\n}"
+            }
+          },
+          "docs": "Launch a new cloud browser session and receive its websocketUrl (CDP), debugUrl, and sessionViewerUrl."
+        },
+        {
+          "info": {
+            "name": "List sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions"
+          },
+          "docs": "Return all sessions for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Get session details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId"
+          },
+          "docs": "Get details for a single session."
+        },
+        {
+          "info": {
+            "name": "Get session context",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/context"
+          },
+          "docs": "Get the captured browser context (cookies, storage) for the session."
+        },
+        {
+          "info": {
+            "name": "Get session live details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/live-details"
+          },
+          "docs": "Get live viewer URLs, the CDP websocketUrl, open pages, and browser state."
+        },
+        {
+          "info": {
+            "name": "Release a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/release"
+          },
+          "docs": "Release (end) a single browser session."
+        },
+        {
+          "info": {
+            "name": "Release all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/release"
+          },
+          "docs": "Release all active browser sessions for the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Session Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scrape current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/scrape",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"format\": [\"markdown\"],\n  \"screenshot\": false,\n  \"pdf\": false\n}"
+            }
+          },
+          "docs": "Scrape the page currently loaded in the session."
+        },
+        {
+          "info": {
+            "name": "Screenshot current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/screenshot",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"fullPage\": true\n}"
+            }
+          },
+          "docs": "Take a screenshot of the current session page."
+        },
+        {
+          "info": {
+            "name": "PDF of current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/pdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a PDF of the current session page."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Quick Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scrape a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/scrape",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"https://example.com\",\n  \"format\": [\"markdown\"],\n  \"screenshot\": false,\n  \"pdf\": false\n}"
+            }
+          },
+          "docs": "Stateless one-off scrape returning content in requested formats plus metadata and links."
+        },
+        {
+          "info": {
+            "name": "Take a screenshot of a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/screenshot",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"https://example.com\",\n  \"fullPage\": true\n}"
+            }
+          },
+          "docs": "Stateless one-off PNG screenshot of a URL."
+        },
+        {
+          "info": {
+            "name": "Get the PDF of a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/pdf",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"https://example.com\"\n}"
+            }
+          },
+          "docs": "Stateless one-off PDF of a URL."
+        },
+        {
+          "info": {
+            "name": "Search the web",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/search",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"open source browser api\"\n}"
+            }
+          },
+          "docs": "Use a search engine to return URLs for a query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List session files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files"
+          },
+          "docs": "List files in a session's browser context."
+        },
+        {
+          "info": {
+            "name": "Upload a file to a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files"
+          },
+          "docs": "Upload a file into a session (multipart/form-data)."
+        },
+        {
+          "info": {
+            "name": "Delete all session files",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files"
+          },
+          "docs": "Delete all files in a session."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Steel
+providerId: steel-dev
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Browser
+- Web Automation
+- Scraping
+- AI Agents
+- Open Source
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Steel Cloud meters usage primarily by concurrent browser sessions and
+  monthly browser hours rather than fixed requests-per-second limits, with
+  bundled proxy bandwidth and CAPTCHA solve allotments per plan. Concurrency
+  caps, monthly browser-hour allotments, proxy bandwidth, and CAPTCHA solves
+  scale with the subscription tier (Hobby, Starter, Developers, Startups,
+  Enterprise). Self-hosted steel-browser instances have no Steel-imposed
+  limits beyond local hardware. Specific per-tier concurrency and request
+  values are not reconciled in this artifact.
+notes: >-
+  Verify concurrency limits, browser-hour allotments, and any per-endpoint
+  request throttling in the Steel dashboard / docs on reconciliation; values
+  change as accounts move between tiers.
+sources:
+- https://steel.dev/pricing
+- https://docs.steel.dev
+- https://github.com/steel-dev/steel-browser
+responseCodes:
+  throttled: 429
+limits:
+- name: Concurrent Sessions
+  scope: account
+  metric: sessions
+  limit: see provider documentation
+  notes: Maximum simultaneous live browser sessions, varies by tier.
+- name: Browser Hours
+  scope: account
+  metric: browser_hours
+  limit: see plan allotment
+  notes: Monthly included browser hours per tier (100 / 290 / 1238 / 9980 / custom).
+- name: Proxy Bandwidth
+  scope: account
+  metric: gigabytes
+  limit: see plan allotment
+  notes: Monthly proxy bandwidth included per tier.
+- name: CAPTCHA Solves
+  scope: account
+  metric: solves
+  limit: see plan allotment
+  notes: Monthly CAPTCHA solve allotment per tier.
+- name: Quick Action Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Stateless scrape / screenshot / pdf / search requests.
+policies:
+- name: Tiered Limits
+  description: Concurrency and monthly allotments raise as accounts move from Hobby to paid and Enterprise tiers.
+- name: Self-Hosted Exemption
+  description: Self-hosted steel-browser instances are not subject to Steel Cloud limits; throughput is bounded only by local resources.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor Retry-After where present.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

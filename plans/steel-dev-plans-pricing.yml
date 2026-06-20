@@ -1,0 +1,265 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Steel
+providerId: steel-dev
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Browser
+- Web Automation
+- Scraping
+- AI Agents
+- Open Source
+- Plans
+description: >-
+  Steel Cloud uses recurring subscription tiers metered primarily in browser
+  hours, with bundled proxy bandwidth and CAPTCHA solves. The Hobby tier is
+  free and includes a monthly credit allotment plus 100 browser hours; paid
+  tiers raise included browser hours, proxy bandwidth, and CAPTCHA solves;
+  Enterprise adds dedicated clusters, higher limits, and discounted rates.
+  Steel is also fully open source (Apache-2.0) via the steel-browser server,
+  which can be self-hosted with no Steel Cloud usage charges.
+notes: >-
+  Plan inclusions captured from the Steel pricing page (browser hours, proxy
+  bandwidth, CAPTCHA solves). Annual billing is discounted ~20% vs monthly.
+  Verify current allotments and overage/per-browser-hour rates on the pricing
+  page during reconciliation.
+sources:
+- https://steel.dev/pricing
+- https://docs.steel.dev
+- https://github.com/steel-dev/steel-browser
+plans:
+- id: steel-hobby
+  name: Hobby
+  type: free
+  description: >-
+    Free entry tier with a monthly credit allotment and 100 included browser
+    hours for getting started.
+  entries:
+  - label: Monthly Credits
+    name: credits
+    type: free
+    metric: credits
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $10 in credits per month
+    userMultiplied: false
+  - label: Browser Hours
+    name: browser_hours
+    type: free
+    metric: browser_hours
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Scrape / Screenshot / PDF
+  - name: CDP Browser Connect
+  - name: Live Session Viewer
+- id: steel-starter
+  name: Starter
+  type: paid
+  description: >-
+    Entry paid tier with 290 browser hours, proxy bandwidth, and CAPTCHA
+    solves.
+  entries:
+  - label: Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $29/month ($23.20/month billed annually)
+    userMultiplied: false
+  - label: Browser Hours
+    name: browser_hours
+    type: included
+    metric: browser_hours
+    limit: 290
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Proxy Bandwidth
+    name: proxy_bandwidth
+    type: included
+    metric: gigabytes
+    limit: 2.9
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: CAPTCHA Solves
+    name: captcha_solves
+    type: included
+    metric: solves
+    limit: 7200
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Quick Actions
+  - name: CDP Browser Connect
+- id: steel-developers
+  name: Developers
+  type: paid
+  description: >-
+    Mid paid tier with 1,238 browser hours, 12 GB proxy bandwidth, and 28k
+    CAPTCHA solves.
+  entries:
+  - label: Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $99/month ($79.20/month billed annually)
+    userMultiplied: false
+  - label: Browser Hours
+    name: browser_hours
+    type: included
+    metric: browser_hours
+    limit: 1238
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Proxy Bandwidth
+    name: proxy_bandwidth
+    type: included
+    metric: gigabytes
+    limit: 12
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: CAPTCHA Solves
+    name: captcha_solves
+    type: included
+    metric: solves
+    limit: 28000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Quick Actions
+  - name: CDP Browser Connect
+- id: steel-startups
+  name: Startups
+  type: paid
+  description: >-
+    High-volume paid tier with 9,980 browser hours, 100 GB proxy bandwidth,
+    and 166k CAPTCHA solves.
+  entries:
+  - label: Subscription
+    name: subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $499/month ($399.20/month billed annually)
+    userMultiplied: false
+  - label: Browser Hours
+    name: browser_hours
+    type: included
+    metric: browser_hours
+    limit: 9980
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Proxy Bandwidth
+    name: proxy_bandwidth
+    type: included
+    metric: gigabytes
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: CAPTCHA Solves
+    name: captcha_solves
+    type: included
+    metric: solves
+    limit: 166000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Quick Actions
+  - name: CDP Browser Connect
+- id: steel-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing with higher limits, discounted rates, dedicated clusters,
+    and dedicated APIs. Contact Steel sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Dedicated Clusters
+  - name: Custom Limits and Rates
+  - name: Dedicated APIs
+- id: steel-self-host
+  name: Self-Hosted (Open Source)
+  type: free
+  description: >-
+    The steel-browser server is open source under Apache-2.0 and can be
+    self-hosted (Docker / local) with no Steel Cloud usage charges. Sessions,
+    quick actions, CDP connect, and the session viewer run from your own
+    instance at http://localhost:3000/v1.
+  entries:
+  - label: Apache-2.0 License
+    name: self_host
+    type: free
+    metric: license
+    limit: -1
+    timeFrame: perpetual
+    geo: global
+    unit: 1
+    price: free (self-hosted infrastructure costs only)
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Quick Actions
+  - name: CDP Browser Connect
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
