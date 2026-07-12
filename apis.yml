@@ -108,6 +108,10 @@ apis:
     session `websocketUrl`, used with Playwright connect_over_cdp, Puppeteer
     connect, or Selenium for full programmatic control of the cloud Chrome instance.
 common:
+- type: DomainSecurity
+  url: security/steel-dev-domain-security.yml
+- type: Authentication
+  url: authentication/steel-dev-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/steel-dev
 - type: LinkedIn

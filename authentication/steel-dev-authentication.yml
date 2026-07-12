@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/steel-dev-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: SteelApiKey
+  type: apiKey
+  in: header
+  parameter: Steel-Api-Key
+  description: API key issued from app.steel.dev. Pass it in the `Steel-Api-Key` request header.
+    Self-hosted instances may run without auth.
+  sources:
+  - openapi/steel-dev-openapi.yml
