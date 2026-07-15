@@ -108,6 +108,8 @@ apis:
     session `websocketUrl`, used with Playwright connect_over_cdp, Puppeteer
     connect, or Selenium for full programmatic control of the cloud Chrome instance.
 common:
+- type: AgenticAccess
+  url: agentic-access/steel-dev-agentic-access.yml
 - type: DomainSecurity
   url: security/steel-dev-domain-security.yml
 - type: Authentication
