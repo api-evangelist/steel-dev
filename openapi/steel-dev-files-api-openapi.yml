@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: Steel Files API
+  description: Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.
+  termsOfService: https://steel.dev/terms-of-service
+  contact:
+    name: Steel Support
+    url: https://docs.steel.dev
+  license:
+    name: Apache 2.0
+    url: https://github.com/steel-dev/steel-browser/blob/main/LICENSE
+  version: '1.0'
+servers:
+- url: https://api.steel.dev/v1
+  description: Steel Cloud
+- url: http://localhost:3000/v1
+  description: Self-hosted steel-browser
+security:
+- SteelApiKey: []
+tags:
+- name: Files
+  description: Manage files inside a session's browser context.
+paths:
+  /sessions/{sessionId}/files:
+    get:
+      operationId: listSessionFiles
+      tags:
+      - Files
+      summary: List files in a session
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: List of files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionFile'
+    post:
+      operationId: uploadSessionFile
+      tags:
+      - Files
+      summary: Upload a file to a session
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                path:
+                  type: string
+      responses:
+        '200':
+          description: Uploaded file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionFile'
+    delete:
+      operationId: deleteSessionFiles
+      tags:
+      - Files
+      summary: Delete all files in a session
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Files deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+components:
+  schemas:
+    SessionFile:
+      type: object
+      properties:
+        path:
+          type: string
+        size:
+          type: integer
+        lastModified:
+          type: string
+          format: date-time
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier of the session.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    SteelApiKey:
+      type: apiKey
+      in: header
+      name: Steel-Api-Key
+      description: API key issued from app.steel.dev. Pass it in the `Steel-Api-Key` request header. Self-hosted instances may run without auth.

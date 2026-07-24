@@ -1,0 +1,370 @@
+openapi: 3.0.1
+info:
+  title: Steel Files Sessions API
+  description: Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.
+  termsOfService: https://steel.dev/terms-of-service
+  contact:
+    name: Steel Support
+    url: https://docs.steel.dev
+  license:
+    name: Apache 2.0
+    url: https://github.com/steel-dev/steel-browser/blob/main/LICENSE
+  version: '1.0'
+servers:
+- url: https://api.steel.dev/v1
+  description: Steel Cloud
+- url: http://localhost:3000/v1
+  description: Self-hosted steel-browser
+security:
+- SteelApiKey: []
+tags:
+- name: Sessions
+  description: Launch, inspect, and release cloud browser sessions.
+paths:
+  /sessions:
+    post:
+      operationId: createSession
+      tags:
+      - Sessions
+      summary: Create a browser session
+      description: Launch a new cloud browser session with optional proxy, fingerprint, dimensions, timezone, ad-blocking, and bandwidth options. Returns the session details including the `websocketUrl` (CDP) used to connect Playwright/Puppeteer over CDP, plus the live session viewer URLs.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSession'
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDetails'
+    get:
+      operationId: listSessions
+      tags:
+      - Sessions
+      summary: List sessions
+      description: Returns all sessions for the authenticated account.
+      responses:
+        '200':
+          description: A list of sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionDetails'
+  /sessions/{sessionId}:
+    get:
+      operationId: getSession
+      tags:
+      - Sessions
+      summary: Get session details
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDetails'
+  /sessions/{sessionId}/context:
+    get:
+      operationId: getSessionContext
+      tags:
+      - Sessions
+      summary: Get session context
+      description: Returns the browser context (cookies, localStorage, sessionStorage, IndexedDB) captured for the session, suitable for persisting and replaying authenticated state.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Session context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionContext'
+  /sessions/{sessionId}/live-details:
+    get:
+      operationId: getSessionLiveDetails
+      tags:
+      - Sessions
+      summary: Get session live details
+      description: Returns the live session viewer URLs, the CDP `websocketUrl`, the list of open pages/tabs, and the current browser state.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Live session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionLiveDetails'
+  /sessions/{sessionId}/release:
+    post:
+      operationId: releaseSession
+      tags:
+      - Sessions
+      summary: Release a session
+      description: Releases (ends) a single browser session and frees its resources.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Session released
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseSession'
+  /sessions/release:
+    post:
+      operationId: releaseSessions
+      tags:
+      - Sessions
+      summary: Release all sessions
+      description: Releases all active browser sessions for the account.
+      responses:
+        '200':
+          description: Sessions released
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseSession'
+components:
+  schemas:
+    SessionDetails:
+      type: object
+      required:
+      - id
+      - createdAt
+      - status
+      - websocketUrl
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - idle
+          - live
+          - released
+          - failed
+        duration:
+          type: integer
+          description: Duration of the session in milliseconds.
+        eventCount:
+          type: integer
+        timeout:
+          type: integer
+          description: Session timeout in milliseconds.
+        creditsUsed:
+          type: integer
+          description: Credits consumed by the session.
+        websocketUrl:
+          type: string
+          description: CDP WebSocket URL (wss://) for the session. Connect with Playwright/Puppeteer via connect_over_cdp / connectOverCDP.
+        debugUrl:
+          type: string
+          description: URL for viewing the live browser instance.
+        debuggerUrl:
+          type: string
+          description: URL for debugging the session.
+        sessionViewerUrl:
+          type: string
+          description: Live session viewer URL.
+        dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        userAgent:
+          type: string
+        proxy:
+          type: string
+        proxyTxBytes:
+          type: integer
+        proxyRxBytes:
+          type: integer
+        solveCaptcha:
+          type: boolean
+        isSelenium:
+          type: boolean
+    SessionContext:
+      type: object
+      description: Captured browser state for the session.
+      properties:
+        cookies:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        localStorage:
+          type: object
+          additionalProperties: true
+        sessionStorage:
+          type: object
+          additionalProperties: true
+        indexedDB:
+          type: object
+          additionalProperties: true
+    CreateSession:
+      type: object
+      description: Options for launching a browser session.
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Optional client-supplied session identifier.
+        proxyUrl:
+          type: string
+          description: Proxy URL to use for the session.
+        userAgent:
+          type: string
+          description: User agent string to use for the session.
+        sessionContext:
+          $ref: '#/components/schemas/SessionContext'
+        blockAds:
+          type: boolean
+          description: Block ads in the session.
+        solveCaptcha:
+          type: boolean
+          description: Enable automatic CAPTCHA solving.
+        optimizeBandwidth:
+          description: Enable bandwidth optimizations. `true` enables all flags; an object allows granular control over blocked resource types and hosts.
+          oneOf:
+          - type: boolean
+          - type: object
+            properties:
+              blockImages:
+                type: boolean
+              blockMedia:
+                type: boolean
+              blockStylesheets:
+                type: boolean
+              blockHosts:
+                type: array
+                items:
+                  type: string
+              blockUrlPatterns:
+                type: array
+                items:
+                  type: string
+        skipFingerprintInjection:
+          type: boolean
+          description: Skip fingerprint injection for this session.
+        deviceConfig:
+          type: object
+          properties:
+            device:
+              type: string
+              enum:
+              - desktop
+              - mobile
+              default: desktop
+        fullscreen:
+          type: boolean
+          description: Launch the browser in fullscreen mode with no Chrome UI.
+        extensions:
+          type: array
+          items:
+            type: string
+          description: Browser extensions to load.
+        persist:
+          type: boolean
+          description: Persist the session for later resumption.
+        timezone:
+          type: string
+          description: Timezone to use for the session.
+        dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        credentials:
+          type: object
+          description: Configuration for autofilled session credentials.
+          properties:
+            autoSubmit:
+              type: boolean
+            blurFields:
+              type: boolean
+            exactOrigin:
+              type: boolean
+        isSelenium:
+          type: boolean
+          description: Indicates if the session is driven over Selenium.
+    Dimensions:
+      type: object
+      properties:
+        width:
+          type: integer
+        height:
+          type: integer
+    SessionLiveDetails:
+      type: object
+      properties:
+        sessionViewerUrl:
+          type: string
+        sessionViewerFullscreenUrl:
+          type: string
+        websocketUrl:
+          type: string
+          description: CDP WebSocket URL for the session.
+        pages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              url:
+                type: string
+              title:
+                type: string
+              favicon:
+                type: string
+                nullable: true
+        browserState:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - idle
+              - live
+              - released
+              - failed
+            userAgent:
+              type: string
+            browserVersion:
+              type: string
+            initialDimensions:
+              $ref: '#/components/schemas/Dimensions'
+            pageCount:
+              type: integer
+    ReleaseSession:
+      allOf:
+      - $ref: '#/components/schemas/SessionDetails'
+      - type: object
+        properties:
+          success:
+            type: boolean
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier of the session.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    SteelApiKey:
+      type: apiKey
+      in: header
+      name: Steel-Api-Key
+      description: API key issued from app.steel.dev. Pass it in the `Steel-Api-Key` request header. Self-hosted instances may run without auth.

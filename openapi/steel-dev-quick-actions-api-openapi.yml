@@ -1,0 +1,235 @@
+openapi: 3.0.1
+info:
+  title: Steel Files Quick Actions API
+  description: Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.
+  termsOfService: https://steel.dev/terms-of-service
+  contact:
+    name: Steel Support
+    url: https://docs.steel.dev
+  license:
+    name: Apache 2.0
+    url: https://github.com/steel-dev/steel-browser/blob/main/LICENSE
+  version: '1.0'
+servers:
+- url: https://api.steel.dev/v1
+  description: Steel Cloud
+- url: http://localhost:3000/v1
+  description: Self-hosted steel-browser
+security:
+- SteelApiKey: []
+tags:
+- name: Quick Actions
+  description: Stateless one-off scrape, screenshot, PDF, and search.
+paths:
+  /scrape:
+    post:
+      operationId: scrape
+      tags:
+      - Quick Actions
+      summary: Scrape a URL
+      description: Stateless one-off scrape. Loads the URL in a fresh browser and returns the requested formats (html, readability, cleaned_html, markdown) plus page metadata and links, with optional screenshot and PDF.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScrapeRequest'
+      responses:
+        '200':
+          description: Scrape result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScrapeResponse'
+  /screenshot:
+    post:
+      operationId: screenshot
+      tags:
+      - Quick Actions
+      summary: Take a screenshot of a URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenshotRequest'
+      responses:
+        '200':
+          description: PNG screenshot
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /pdf:
+    post:
+      operationId: pdf
+      tags:
+      - Quick Actions
+      summary: Get the PDF of a URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PDFRequest'
+      responses:
+        '200':
+          description: PDF document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+  /search:
+    post:
+      operationId: search
+      tags:
+      - Quick Actions
+      summary: Search the web
+      description: Uses a search engine to return URLs for a query.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+components:
+  schemas:
+    ScrapeRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        format:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScrapeFormat'
+        screenshot:
+          type: boolean
+        pdf:
+          type: boolean
+        removeBase64Images:
+          type: boolean
+        proxyUrl:
+          type: string
+          nullable: true
+        delay:
+          type: number
+    ScreenshotRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        fullPage:
+          type: boolean
+        proxyUrl:
+          type: string
+          nullable: true
+        delay:
+          type: number
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+              description:
+                type: string
+                nullable: true
+    ScrapeResponse:
+      type: object
+      properties:
+        content:
+          type: object
+          description: Map of requested format to extracted content.
+          additionalProperties: true
+        metadata:
+          type: object
+          properties:
+            title:
+              type: string
+            language:
+              type: string
+            urlSource:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            description:
+              type: string
+            statusCode:
+              type: integer
+            wordCount:
+              type: number
+            canonical:
+              type: string
+            favicon:
+              type: string
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              text:
+                type: string
+        screenshot:
+          type: string
+          description: Base64 screenshot, present when screenshot=true.
+        pdf:
+          type: string
+          description: Base64 PDF, present when pdf=true.
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
+    SearchRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+        proxyUrl:
+          type: string
+          nullable: true
+    PDFRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        proxyUrl:
+          type: string
+          nullable: true
+        delay:
+          type: number
+  securitySchemes:
+    SteelApiKey:
+      type: apiKey
+      in: header
+      name: Steel-Api-Key
+      description: API key issued from app.steel.dev. Pass it in the `Steel-Api-Key` request header. Self-hosted instances may run without auth.
