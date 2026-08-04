@@ -1,0 +1,20 @@
+{
+  "provider": "steel-dev",
+  "sources": [
+    "steel-dev-files-api-openapi.yml",
+    "steel-dev-quick-actions-api-openapi.yml",
+    "steel-dev-session-actions-api-openapi.yml",
+    "steel-dev-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "steel-dev-files-api-openapi.yml",
+    "steel-dev-quick-actions-api-openapi.yml",
+    "steel-dev-session-actions-api-openapi.yml",
+    "steel-dev-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
