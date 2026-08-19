@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Steel Files Session Actions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Steel-Api-Key",
+      "value": "{{Steel-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scrape the current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/scrape",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extracts content from the page currently loaded in the session."
+        },
+        {
+          "info": {
+            "name": "Screenshot the current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/screenshot",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Screenshot the current session page"
+        },
+        {
+          "info": {
+            "name": "Generate a PDF of the current session page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/pdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a PDF of the current session page"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

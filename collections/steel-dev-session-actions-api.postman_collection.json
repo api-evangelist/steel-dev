@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "ed0ba413-ec2e-4ec5-b931-1b365edb534b",
+      "name": "Session Actions",
+      "description": {
+        "content": "Scrape, screenshot, and PDF the page in a running session.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fab43dfa-a264-4e75-97f1-7ccd4c7ba35c",
+          "name": "Scrape the current session page",
+          "request": {
+            "name": "Scrape the current session page",
+            "description": {
+              "content": "Extracts content from the page currently loaded in the session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"format\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"screenshot\": \"<boolean>\",\n  \"pdf\": \"<boolean>\",\n  \"removeBase64Images\": \"<boolean>\",\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "33f4032f-9249-4d28-88f1-5b8ace62cae9",
+              "name": "Scrape result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"format\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"screenshot\": \"<boolean>\",\n  \"pdf\": \"<boolean>\",\n  \"removeBase64Images\": \"<boolean>\",\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": {\n    \"key_0\": 4959.263453611955,\n    \"key_1\": 7672\n  },\n  \"metadata\": {\n    \"title\": \"string\",\n    \"language\": \"string\",\n    \"urlSource\": \"string\",\n    \"timestamp\": \"2012-09-29T08:01:24.845Z\",\n    \"description\": \"string\",\n    \"statusCode\": 5878,\n    \"wordCount\": 2083.456108298266,\n    \"canonical\": \"string\",\n    \"favicon\": \"string\"\n  },\n  \"links\": [\n    {\n      \"url\": \"string\",\n      \"text\": \"string\"\n    },\n    {\n      \"url\": \"string\",\n      \"text\": \"string\"\n    }\n  ],\n  \"screenshot\": \"string\",\n  \"pdf\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c29c555-3d06-440b-a0b3-daa09b78c9d3",
+          "name": "Screenshot the current session page",
+          "request": {
+            "name": "Screenshot the current session page",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "screenshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullPage\": \"<boolean>\",\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb3c8cd7-49b7-4873-b69b-0c95bdf3dac4",
+              "name": "PNG screenshot",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullPage\": \"<boolean>\",\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9b14076-2552-4941-b1fc-05868a59b528",
+          "name": "Generate a PDF of the current session page",
+          "request": {
+            "name": "Generate a PDF of the current session page",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf672f56-ebe5-48fa-8fbb-dcf7fbb5a8c2",
+              "name": "PDF document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"proxyUrl\": \"<string>\",\n  \"delay\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.steel.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Steel-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dceca76b-7f8a-443d-a41b-e25e41d823c4",
+    "name": "Steel Files Session Actions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.\n\nContact Support:\n Name: Steel Support",
+      "type": "text/plain"
+    }
+  }
+}

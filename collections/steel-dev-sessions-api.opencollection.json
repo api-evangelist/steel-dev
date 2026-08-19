@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Steel Files Sessions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Steel-Api-Key",
+      "value": "{{Steel-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions"
+          },
+          "docs": "Returns all sessions for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Create a browser session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launch a new cloud browser session with optional proxy, fingerprint, dimensions, timezone, ad-blocking, and bandwidth options. Returns the session details including the `websocketUrl` (CDP) used to connect Playwright/Puppeteer over CDP, plus the live session viewer URLs."
+        },
+        {
+          "info": {
+            "name": "Get session details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "Get session details"
+        },
+        {
+          "info": {
+            "name": "Get session context",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/context",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "Returns the browser context (cookies, localStorage, sessionStorage, IndexedDB) captured for the session, suitable for persisting and replaying authenticated state."
+        },
+        {
+          "info": {
+            "name": "Get session live details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/live-details",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "Returns the live session viewer URLs, the CDP `websocketUrl`, the list of open pages/tabs, and the current browser state."
+        },
+        {
+          "info": {
+            "name": "Release a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/release",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "Releases (ends) a single browser session and frees its resources."
+        },
+        {
+          "info": {
+            "name": "Release all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/release"
+          },
+          "docs": "Releases all active browser sessions for the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

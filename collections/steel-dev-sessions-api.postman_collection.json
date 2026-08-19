@@ -1,0 +1,693 @@
+{
+  "item": [
+    {
+      "id": "66b50a1c-26fb-4c63-b6b6-1bc3f4b73a73",
+      "name": "Sessions",
+      "description": {
+        "content": "Launch, inspect, and release cloud browser sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ff66e64-d424-4928-9d42-760062b686ec",
+          "name": "Create a browser session",
+          "request": {
+            "name": "Create a browser session",
+            "description": {
+              "content": "Launch a new cloud browser session with optional proxy, fingerprint, dimensions, timezone, ad-blocking, and bandwidth options. Returns the session details including the `websocketUrl` (CDP) used to connect Playwright/Puppeteer over CDP, plus the live session viewer URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": \"<uuid>\",\n  \"proxyUrl\": \"<string>\",\n  \"userAgent\": \"<string>\",\n  \"sessionContext\": {\n    \"cookies\": [\n      {\n        \"key_0\": 2924.888833853493\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    ],\n    \"localStorage\": {\n      \"key_0\": 8229\n    },\n    \"sessionStorage\": {\n      \"key_0\": 8258.703490775999\n    },\n    \"indexedDB\": {\n      \"key_0\": 900.005938416597,\n      \"key_1\": 6469\n    }\n  },\n  \"blockAds\": \"<boolean>\",\n  \"solveCaptcha\": \"<boolean>\",\n  \"optimizeBandwidth\": \"<boolean>\",\n  \"skipFingerprintInjection\": \"<boolean>\",\n  \"deviceConfig\": {\n    \"device\": \"desktop\"\n  },\n  \"fullscreen\": \"<boolean>\",\n  \"extensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"persist\": \"<boolean>\",\n  \"timezone\": \"<string>\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"credentials\": {\n    \"autoSubmit\": \"<boolean>\",\n    \"blurFields\": \"<boolean>\",\n    \"exactOrigin\": \"<boolean>\"\n  },\n  \"isSelenium\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52f23e19-fd9d-4eb1-aa84-472972a75745",
+              "name": "Session created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sessionId\": \"<uuid>\",\n  \"proxyUrl\": \"<string>\",\n  \"userAgent\": \"<string>\",\n  \"sessionContext\": {\n    \"cookies\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      {\n        \"key_0\": false,\n        \"key_1\": 3685.057974411744,\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    ],\n    \"localStorage\": {\n      \"key_0\": 3757,\n      \"key_1\": 8564.22907099061\n    },\n    \"sessionStorage\": {\n      \"key_0\": 8617.149680278037\n    },\n    \"indexedDB\": {\n      \"key_0\": \"string\",\n      \"key_1\": 392.53953247143204,\n      \"key_2\": \"string\"\n    }\n  },\n  \"blockAds\": \"<boolean>\",\n  \"solveCaptcha\": \"<boolean>\",\n  \"optimizeBandwidth\": \"<boolean>\",\n  \"skipFingerprintInjection\": \"<boolean>\",\n  \"deviceConfig\": {\n    \"device\": \"desktop\"\n  },\n  \"fullscreen\": \"<boolean>\",\n  \"extensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"persist\": \"<boolean>\",\n  \"timezone\": \"<string>\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"credentials\": {\n    \"autoSubmit\": \"<boolean>\",\n    \"blurFields\": \"<boolean>\",\n    \"exactOrigin\": \"<boolean>\"\n  },\n  \"isSelenium\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"150963ac-110b-8277-1e45-065ab63f975d\",\n  \"createdAt\": \"2024-12-04T04:07:12.745Z\",\n  \"status\": \"failed\",\n  \"websocketUrl\": \"string\",\n  \"duration\": 5749,\n  \"eventCount\": 6845,\n  \"timeout\": 3472,\n  \"creditsUsed\": 4888,\n  \"debugUrl\": \"string\",\n  \"debuggerUrl\": \"string\",\n  \"sessionViewerUrl\": \"string\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"userAgent\": \"string\",\n  \"proxy\": \"string\",\n  \"proxyTxBytes\": 6034,\n  \"proxyRxBytes\": 1957,\n  \"solveCaptcha\": false,\n  \"isSelenium\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59acb208-7711-45be-935e-b8e2b4d89846",
+          "name": "List sessions",
+          "request": {
+            "name": "List sessions",
+            "description": {
+              "content": "Returns all sessions for the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0422db3b-0bad-4e99-aa7c-2642127d6c43",
+              "name": "A list of sessions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"id\": \"9825056f-19cc-362c-e7ee-eb8ece2d18f7\",\n      \"createdAt\": \"1996-06-08T20:43:17.692Z\",\n      \"status\": \"failed\",\n      \"websocketUrl\": \"string\",\n      \"duration\": 1991,\n      \"eventCount\": 7676,\n      \"timeout\": 8854,\n      \"creditsUsed\": 4517,\n      \"debugUrl\": \"string\",\n      \"debuggerUrl\": \"string\",\n      \"sessionViewerUrl\": \"string\",\n      \"dimensions\": {\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      \"userAgent\": \"string\",\n      \"proxy\": \"string\",\n      \"proxyTxBytes\": 8106,\n      \"proxyRxBytes\": 2930,\n      \"solveCaptcha\": false,\n      \"isSelenium\": false\n    },\n    {\n      \"id\": \"e2bd772e-03db-95a6-003d-c287140cf308\",\n      \"createdAt\": \"1972-03-30T09:57:02.337Z\",\n      \"status\": \"released\",\n      \"websocketUrl\": \"string\",\n      \"duration\": 2754,\n      \"eventCount\": 7224,\n      \"timeout\": 7377,\n      \"creditsUsed\": 8255,\n      \"debugUrl\": \"string\",\n      \"debuggerUrl\": \"string\",\n      \"sessionViewerUrl\": \"string\",\n      \"dimensions\": {\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      \"userAgent\": \"string\",\n      \"proxy\": \"string\",\n      \"proxyTxBytes\": 4171,\n      \"proxyRxBytes\": 9984,\n      \"solveCaptcha\": false,\n      \"isSelenium\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "304cafb8-1833-4d47-b6eb-e45d6940e4e2",
+          "name": "Get session details",
+          "request": {
+            "name": "Get session details",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":sessionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c2ca801-c7e5-4b73-b662-479149c78ab1",
+              "name": "Session details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"150963ac-110b-8277-1e45-065ab63f975d\",\n  \"createdAt\": \"2024-12-04T04:07:12.745Z\",\n  \"status\": \"failed\",\n  \"websocketUrl\": \"string\",\n  \"duration\": 5749,\n  \"eventCount\": 6845,\n  \"timeout\": 3472,\n  \"creditsUsed\": 4888,\n  \"debugUrl\": \"string\",\n  \"debuggerUrl\": \"string\",\n  \"sessionViewerUrl\": \"string\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"userAgent\": \"string\",\n  \"proxy\": \"string\",\n  \"proxyTxBytes\": 6034,\n  \"proxyRxBytes\": 1957,\n  \"solveCaptcha\": false,\n  \"isSelenium\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c966cbda-8c0a-4d91-b5db-cf3ac117c537",
+          "name": "Get session context",
+          "request": {
+            "name": "Get session context",
+            "description": {
+              "content": "Returns the browser context (cookies, localStorage, sessionStorage, IndexedDB) captured for the session, suitable for persisting and replaying authenticated state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":sessionId",
+                "context"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a747d551-7bce-44f8-8f6f-3b4e59351cc8",
+              "name": "Session context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":sessionId",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cookies\": [\n    {\n      \"key_0\": 8342.591924617866,\n      \"key_1\": 983,\n      \"key_2\": 942\n    },\n    {\n      \"key_0\": 2749,\n      \"key_1\": false,\n      \"key_2\": 4,\n      \"key_3\": \"string\"\n    }\n  ],\n  \"localStorage\": {\n    \"key_0\": \"string\"\n  },\n  \"sessionStorage\": {\n    \"key_0\": 2344,\n    \"key_1\": \"string\"\n  },\n  \"indexedDB\": {\n    \"key_0\": 6567,\n    \"key_1\": false,\n    \"key_2\": 9837.181280753275\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acbe309d-cd13-48c5-a007-693368222458",
+          "name": "Get session live details",
+          "request": {
+            "name": "Get session live details",
+            "description": {
+              "content": "Returns the live session viewer URLs, the CDP `websocketUrl`, the list of open pages/tabs, and the current browser state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":sessionId",
+                "live-details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c0891a9-73aa-4f7a-a87b-e08d129b1ab5",
+              "name": "Live session details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":sessionId",
+                    "live-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionViewerUrl\": \"string\",\n  \"sessionViewerFullscreenUrl\": \"string\",\n  \"websocketUrl\": \"string\",\n  \"pages\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"title\": \"string\",\n      \"favicon\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"title\": \"string\",\n      \"favicon\": \"string\"\n    }\n  ],\n  \"browserState\": {\n    \"status\": \"idle\",\n    \"userAgent\": \"string\",\n    \"browserVersion\": \"string\",\n    \"initialDimensions\": {\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\"\n    },\n    \"pageCount\": 4601\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d70356a8-4b5e-4ac4-8303-9ad92f8599ab",
+          "name": "Release a session",
+          "request": {
+            "name": "Release a session",
+            "description": {
+              "content": "Releases (ends) a single browser session and frees its resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":sessionId",
+                "release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83c1b9b7-e574-4a82-b2a1-f1aab4b38f32",
+              "name": "Session released",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":sessionId",
+                    "release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"10204fcf-f331-d95c-5407-d59dd77cb817\",\n  \"createdAt\": \"1949-07-24T14:58:49.937Z\",\n  \"status\": \"live\",\n  \"websocketUrl\": \"string\",\n  \"duration\": 5526,\n  \"eventCount\": 9773,\n  \"timeout\": 6893,\n  \"creditsUsed\": 2879,\n  \"debugUrl\": \"string\",\n  \"debuggerUrl\": \"string\",\n  \"sessionViewerUrl\": \"string\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"userAgent\": \"string\",\n  \"proxy\": \"string\",\n  \"proxyTxBytes\": 8226,\n  \"proxyRxBytes\": 1837,\n  \"solveCaptcha\": true,\n  \"isSelenium\": false,\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "882bda69-8ff2-4cd1-bece-7f415a64913d",
+          "name": "Release all sessions",
+          "request": {
+            "name": "Release all sessions",
+            "description": {
+              "content": "Releases all active browser sessions for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                "release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dc8a564-5185-4467-95c1-b5780b40d4d2",
+              "name": "Sessions released",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Steel-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"10204fcf-f331-d95c-5407-d59dd77cb817\",\n  \"createdAt\": \"1949-07-24T14:58:49.937Z\",\n  \"status\": \"live\",\n  \"websocketUrl\": \"string\",\n  \"duration\": 5526,\n  \"eventCount\": 9773,\n  \"timeout\": 6893,\n  \"creditsUsed\": 2879,\n  \"debugUrl\": \"string\",\n  \"debuggerUrl\": \"string\",\n  \"sessionViewerUrl\": \"string\",\n  \"dimensions\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"userAgent\": \"string\",\n  \"proxy\": \"string\",\n  \"proxyTxBytes\": 8226,\n  \"proxyRxBytes\": 1837,\n  \"solveCaptcha\": true,\n  \"isSelenium\": false,\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.steel.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Steel-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e1d7de38-7d84-4d98-b1f3-251ad9d7962b",
+    "name": "Steel Files Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.\n\nContact Support:\n Name: Steel Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Steel Files API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Steel-Api-Key",
+      "value": "{{Steel-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List files in a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "List files in a session"
+        },
+        {
+          "info": {
+            "name": "Upload a file to a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "path",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a file to a session"
+        },
+        {
+          "info": {
+            "name": "Delete all files in a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.steel.dev/v1/sessions/:sessionId/files",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the session."
+              }
+            ]
+          },
+          "docs": "Delete all files in a session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
