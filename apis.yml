@@ -27,6 +27,12 @@ tags:
 - Web Automation
 - Scraping
 - AI Agents
+- Open-Source
+tags_raw:
+- Browser
+- Web Automation
+- Scraping
+- AI Agents
 - Open Source
 created: '2026-06-20'
 modified: '2026-06-20'
@@ -38,6 +44,8 @@ apis:
   humanURL: https://docs.steel.dev/overview/sessions-api
   baseURL: https://api.steel.dev/v1
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
