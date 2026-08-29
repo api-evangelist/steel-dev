@@ -8,6 +8,18 @@ description: Steel is the open-source browser API for AI agents and apps. The St
   session viewer, while long-running automation connects to a per-session Chrome
   DevTools Protocol (CDP) WebSocket driven with Playwright, Puppeteer, or Selenium.
   The same surface ships self-hosted under Apache-2.0 as steel-browser.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
