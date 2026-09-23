@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Steel Files Quick Actions API
-  description: Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.
+  title: Steel Quick Actions API
+  description: Steel is the open-source browser API for AI agents and apps.
   termsOfService: https://steel.dev/terms-of-service
   contact:
     name: Steel Support
@@ -103,6 +103,21 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
+    ScreenshotRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        fullPage:
+          type: boolean
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
     ScrapeRequest:
       type: object
       required:
@@ -121,22 +136,9 @@ components:
         removeBase64Images:
           type: boolean
         proxyUrl:
-          type: string
-          nullable: true
-        delay:
-          type: number
-    ScreenshotRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-        fullPage:
-          type: boolean
-        proxyUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         delay:
           type: number
     SearchResponse:
@@ -152,8 +154,40 @@ components:
               url:
                 type: string
               description:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
+    PDFRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    SearchRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+        proxyUrl:
+          type:
+          - string
+          - 'null'
     ScrapeResponse:
       type: object
       properties:
@@ -198,35 +232,6 @@ components:
         pdf:
           type: string
           description: Base64 PDF, present when pdf=true.
-    ScrapeFormat:
-      type: string
-      enum:
-      - html
-      - readability
-      - cleaned_html
-      - markdown
-    SearchRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-        proxyUrl:
-          type: string
-          nullable: true
-    PDFRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-        proxyUrl:
-          type: string
-          nullable: true
-        delay:
-          type: number
   securitySchemes:
     SteelApiKey:
       type: apiKey

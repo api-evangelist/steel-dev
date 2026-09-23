@@ -1,0 +1,32 @@
+# Front Door AI Index — steel-dev — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: steel-dev
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: steel.dev
+  final_host: steel.dev
+  ownership: own
+  owner: steel-dev
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 52
+  host_score: 52
+  density: 35.47
+  words: 1466
+  tiers:
+    agentic: 14
+    core: 19
+    model: 19
+  ambiguous: 38
+  top_terms:
+    agent: 26
+    AI: 17
+    OpenAI: 14
+    AI agent: 13
+    automation: 12
+    Claude: 5
+    LLMs: 2
+    llms.txt: 1

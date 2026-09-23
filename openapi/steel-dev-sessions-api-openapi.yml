@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Steel Files Sessions API
-  description: Steel is the open-source browser API for AI agents and apps. The Steel Cloud REST API launches and manages cloud browser sessions, runs stateless quick actions (scrape, screenshot, pdf, search), and exposes a live session viewer. Long-running automation connects to the per-session Chrome DevTools Protocol (CDP) WebSocket returned as `websocketUrl`, which is driven with Playwright, Puppeteer, or Selenium. The same surface is available self-hosted (Apache-2.0) from the steel-browser server, where the default base path is http://localhost:3000/v1.
+  title: Steel Sessions API
+  description: Steel is the open-source browser API for AI agents and apps.
   termsOfService: https://steel.dev/terms-of-service
   contact:
     name: Steel Support
@@ -138,82 +138,6 @@ paths:
                 $ref: '#/components/schemas/ReleaseSession'
 components:
   schemas:
-    SessionDetails:
-      type: object
-      required:
-      - id
-      - createdAt
-      - status
-      - websocketUrl
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - idle
-          - live
-          - released
-          - failed
-        duration:
-          type: integer
-          description: Duration of the session in milliseconds.
-        eventCount:
-          type: integer
-        timeout:
-          type: integer
-          description: Session timeout in milliseconds.
-        creditsUsed:
-          type: integer
-          description: Credits consumed by the session.
-        websocketUrl:
-          type: string
-          description: CDP WebSocket URL (wss://) for the session. Connect with Playwright/Puppeteer via connect_over_cdp / connectOverCDP.
-        debugUrl:
-          type: string
-          description: URL for viewing the live browser instance.
-        debuggerUrl:
-          type: string
-          description: URL for debugging the session.
-        sessionViewerUrl:
-          type: string
-          description: Live session viewer URL.
-        dimensions:
-          $ref: '#/components/schemas/Dimensions'
-        userAgent:
-          type: string
-        proxy:
-          type: string
-        proxyTxBytes:
-          type: integer
-        proxyRxBytes:
-          type: integer
-        solveCaptcha:
-          type: boolean
-        isSelenium:
-          type: boolean
-    SessionContext:
-      type: object
-      description: Captured browser state for the session.
-      properties:
-        cookies:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        localStorage:
-          type: object
-          additionalProperties: true
-        sessionStorage:
-          type: object
-          additionalProperties: true
-        indexedDB:
-          type: object
-          additionalProperties: true
     CreateSession:
       type: object
       description: Options for launching a browser session.
@@ -297,13 +221,6 @@ components:
         isSelenium:
           type: boolean
           description: Indicates if the session is driven over Selenium.
-    Dimensions:
-      type: object
-      properties:
-        width:
-          type: integer
-        height:
-          type: integer
     SessionLiveDetails:
       type: object
       properties:
@@ -326,8 +243,9 @@ components:
               title:
                 type: string
               favicon:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
         browserState:
           type: object
           properties:
@@ -346,6 +264,31 @@ components:
               $ref: '#/components/schemas/Dimensions'
             pageCount:
               type: integer
+    Dimensions:
+      type: object
+      properties:
+        width:
+          type: integer
+        height:
+          type: integer
+    SessionContext:
+      type: object
+      description: Captured browser state for the session.
+      properties:
+        cookies:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        localStorage:
+          type: object
+          additionalProperties: true
+        sessionStorage:
+          type: object
+          additionalProperties: true
+        indexedDB:
+          type: object
+          additionalProperties: true
     ReleaseSession:
       allOf:
       - $ref: '#/components/schemas/SessionDetails'
@@ -353,6 +296,64 @@ components:
         properties:
           success:
             type: boolean
+    SessionDetails:
+      type: object
+      required:
+      - id
+      - createdAt
+      - status
+      - websocketUrl
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - idle
+          - live
+          - released
+          - failed
+        duration:
+          type: integer
+          description: Duration of the session in milliseconds.
+        eventCount:
+          type: integer
+        timeout:
+          type: integer
+          description: Session timeout in milliseconds.
+        creditsUsed:
+          type: integer
+          description: Credits consumed by the session.
+        websocketUrl:
+          type: string
+          description: CDP WebSocket URL (wss://) for the session. Connect with Playwright/Puppeteer via connect_over_cdp / connectOverCDP.
+        debugUrl:
+          type: string
+          description: URL for viewing the live browser instance.
+        debuggerUrl:
+          type: string
+          description: URL for debugging the session.
+        sessionViewerUrl:
+          type: string
+          description: Live session viewer URL.
+        dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        userAgent:
+          type: string
+        proxy:
+          type: string
+        proxyTxBytes:
+          type: integer
+        proxyRxBytes:
+          type: integer
+        solveCaptcha:
+          type: boolean
+        isSelenium:
+          type: boolean
   parameters:
     SessionId:
       name: sessionId
