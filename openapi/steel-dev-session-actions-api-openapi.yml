@@ -83,10 +83,19 @@ paths:
                 format: binary
 components:
   schemas:
-    SessionScreenshotRequest:
+    SessionScrapeRequest:
       type: object
+      description: Scrape request for the current session page (no url).
       properties:
-        fullPage:
+        format:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScrapeFormat'
+        screenshot:
+          type: boolean
+        pdf:
+          type: boolean
+        removeBase64Images:
           type: boolean
         proxyUrl:
           type:
@@ -103,19 +112,10 @@ components:
           - 'null'
         delay:
           type: number
-    SessionScrapeRequest:
+    SessionScreenshotRequest:
       type: object
-      description: Scrape request for the current session page (no url).
       properties:
-        format:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScrapeFormat'
-        screenshot:
-          type: boolean
-        pdf:
-          type: boolean
-        removeBase64Images:
+        fullPage:
           type: boolean
         proxyUrl:
           type:

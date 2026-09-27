@@ -85,6 +85,15 @@ paths:
                   success:
                     type: boolean
 components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier of the session.
+      schema:
+        type: string
+        format: uuid
   schemas:
     SessionFile:
       type: object
@@ -96,15 +105,6 @@ components:
         lastModified:
           type: string
           format: date-time
-  parameters:
-    SessionId:
-      name: sessionId
-      in: path
-      required: true
-      description: Unique identifier of the session.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     SteelApiKey:
       type: apiKey

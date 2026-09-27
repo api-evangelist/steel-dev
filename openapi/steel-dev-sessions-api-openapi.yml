@@ -137,6 +137,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReleaseSession'
 components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier of the session.
+      schema:
+        type: string
+        format: uuid
   schemas:
     CreateSession:
       type: object
@@ -264,31 +273,6 @@ components:
               $ref: '#/components/schemas/Dimensions'
             pageCount:
               type: integer
-    Dimensions:
-      type: object
-      properties:
-        width:
-          type: integer
-        height:
-          type: integer
-    SessionContext:
-      type: object
-      description: Captured browser state for the session.
-      properties:
-        cookies:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        localStorage:
-          type: object
-          additionalProperties: true
-        sessionStorage:
-          type: object
-          additionalProperties: true
-        indexedDB:
-          type: object
-          additionalProperties: true
     ReleaseSession:
       allOf:
       - $ref: '#/components/schemas/SessionDetails'
@@ -354,15 +338,31 @@ components:
           type: boolean
         isSelenium:
           type: boolean
-  parameters:
-    SessionId:
-      name: sessionId
-      in: path
-      required: true
-      description: Unique identifier of the session.
-      schema:
-        type: string
-        format: uuid
+    Dimensions:
+      type: object
+      properties:
+        width:
+          type: integer
+        height:
+          type: integer
+    SessionContext:
+      type: object
+      description: Captured browser state for the session.
+      properties:
+        cookies:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        localStorage:
+          type: object
+          additionalProperties: true
+        sessionStorage:
+          type: object
+          additionalProperties: true
+        indexedDB:
+          type: object
+          additionalProperties: true
   securitySchemes:
     SteelApiKey:
       type: apiKey

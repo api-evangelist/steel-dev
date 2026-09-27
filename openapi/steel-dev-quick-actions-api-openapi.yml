@@ -118,6 +118,22 @@ components:
           - 'null'
         delay:
           type: number
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
     ScrapeRequest:
       type: object
       required:
@@ -141,29 +157,17 @@ components:
           - 'null'
         delay:
           type: number
-    SearchResponse:
+    SearchRequest:
       type: object
+      required:
+      - query
       properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              title:
-                type: string
-              url:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
-    ScrapeFormat:
-      type: string
-      enum:
-      - html
-      - readability
-      - cleaned_html
-      - markdown
+        query:
+          type: string
+        proxyUrl:
+          type:
+          - string
+          - 'null'
     PDFRequest:
       type: object
       required:
@@ -177,17 +181,13 @@ components:
           - 'null'
         delay:
           type: number
-    SearchRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-        proxyUrl:
-          type:
-          - string
-          - 'null'
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
     ScrapeResponse:
       type: object
       properties:
