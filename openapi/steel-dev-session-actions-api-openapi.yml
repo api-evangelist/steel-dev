@@ -83,53 +83,6 @@ paths:
                 format: binary
 components:
   schemas:
-    SessionScrapeRequest:
-      type: object
-      description: Scrape request for the current session page (no url).
-      properties:
-        format:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScrapeFormat'
-        screenshot:
-          type: boolean
-        pdf:
-          type: boolean
-        removeBase64Images:
-          type: boolean
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
-    SessionPDFRequest:
-      type: object
-      properties:
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
-    SessionScreenshotRequest:
-      type: object
-      properties:
-        fullPage:
-          type: boolean
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
-    ScrapeFormat:
-      type: string
-      enum:
-      - html
-      - readability
-      - cleaned_html
-      - markdown
     ScrapeResponse:
       type: object
       properties:
@@ -174,6 +127,53 @@ components:
         pdf:
           type: string
           description: Base64 PDF, present when pdf=true.
+    SessionScrapeRequest:
+      type: object
+      description: Scrape request for the current session page (no url).
+      properties:
+        format:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScrapeFormat'
+        screenshot:
+          type: boolean
+        pdf:
+          type: boolean
+        removeBase64Images:
+          type: boolean
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    SessionScreenshotRequest:
+      type: object
+      properties:
+        fullPage:
+          type: boolean
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    SessionPDFRequest:
+      type: object
+      properties:
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
   securitySchemes:
     SteelApiKey:
       type: apiKey
