@@ -83,6 +83,24 @@ paths:
                 format: binary
 components:
   schemas:
+    SessionScreenshotRequest:
+      type: object
+      properties:
+        fullPage:
+          type: boolean
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
     ScrapeResponse:
       type: object
       properties:
@@ -147,17 +165,6 @@ components:
           - 'null'
         delay:
           type: number
-    SessionScreenshotRequest:
-      type: object
-      properties:
-        fullPage:
-          type: boolean
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
     SessionPDFRequest:
       type: object
       properties:
@@ -167,13 +174,6 @@ components:
           - 'null'
         delay:
           type: number
-    ScrapeFormat:
-      type: string
-      enum:
-      - html
-      - readability
-      - cleaned_html
-      - markdown
   securitySchemes:
     SteelApiKey:
       type: apiKey

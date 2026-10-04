@@ -103,22 +103,6 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
-    SearchResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              title:
-                type: string
-              url:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
     ScreenshotRequest:
       type: object
       required:
@@ -134,6 +118,49 @@ components:
           - 'null'
         delay:
           type: number
+    ScrapeRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        format:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScrapeFormat'
+        screenshot:
+          type: boolean
+        pdf:
+          type: boolean
+        removeBase64Images:
+          type: boolean
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    PDFRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+        proxyUrl:
+          type:
+          - string
+          - 'null'
+        delay:
+          type: number
+    ScrapeFormat:
+      type: string
+      enum:
+      - html
+      - readability
+      - cleaned_html
+      - markdown
     ScrapeResponse:
       type: object
       properties:
@@ -178,19 +205,6 @@ components:
         pdf:
           type: string
           description: Base64 PDF, present when pdf=true.
-    PDFRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
     SearchRequest:
       type: object
       required:
@@ -202,36 +216,22 @@ components:
           type:
           - string
           - 'null'
-    ScrapeRequest:
+    SearchResponse:
       type: object
-      required:
-      - url
       properties:
-        url:
-          type: string
-        format:
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/ScrapeFormat'
-        screenshot:
-          type: boolean
-        pdf:
-          type: boolean
-        removeBase64Images:
-          type: boolean
-        proxyUrl:
-          type:
-          - string
-          - 'null'
-        delay:
-          type: number
-    ScrapeFormat:
-      type: string
-      enum:
-      - html
-      - readability
-      - cleaned_html
-      - markdown
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
   securitySchemes:
     SteelApiKey:
       type: apiKey

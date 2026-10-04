@@ -138,6 +138,49 @@ paths:
                 $ref: '#/components/schemas/ReleaseSession'
 components:
   schemas:
+    SessionLiveDetails:
+      type: object
+      properties:
+        sessionViewerUrl:
+          type: string
+        sessionViewerFullscreenUrl:
+          type: string
+        websocketUrl:
+          type: string
+          description: CDP WebSocket URL for the session.
+        pages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              url:
+                type: string
+              title:
+                type: string
+              favicon:
+                type:
+                - string
+                - 'null'
+        browserState:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - idle
+              - live
+              - released
+              - failed
+            userAgent:
+              type: string
+            browserVersion:
+              type: string
+            initialDimensions:
+              $ref: '#/components/schemas/Dimensions'
+            pageCount:
+              type: integer
     SessionContext:
       type: object
       description: Captured browser state for the session.
@@ -239,6 +282,13 @@ components:
         isSelenium:
           type: boolean
           description: Indicates if the session is driven over Selenium.
+    Dimensions:
+      type: object
+      properties:
+        width:
+          type: integer
+        height:
+          type: integer
     SessionDetails:
       type: object
       required:
@@ -297,49 +347,6 @@ components:
           type: boolean
         isSelenium:
           type: boolean
-    SessionLiveDetails:
-      type: object
-      properties:
-        sessionViewerUrl:
-          type: string
-        sessionViewerFullscreenUrl:
-          type: string
-        websocketUrl:
-          type: string
-          description: CDP WebSocket URL for the session.
-        pages:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              url:
-                type: string
-              title:
-                type: string
-              favicon:
-                type:
-                - string
-                - 'null'
-        browserState:
-          type: object
-          properties:
-            status:
-              type: string
-              enum:
-              - idle
-              - live
-              - released
-              - failed
-            userAgent:
-              type: string
-            browserVersion:
-              type: string
-            initialDimensions:
-              $ref: '#/components/schemas/Dimensions'
-            pageCount:
-              type: integer
     ReleaseSession:
       allOf:
       - $ref: '#/components/schemas/SessionDetails'
@@ -347,13 +354,6 @@ components:
         properties:
           success:
             type: boolean
-    Dimensions:
-      type: object
-      properties:
-        width:
-          type: integer
-        height:
-          type: integer
   parameters:
     SessionId:
       name: sessionId
