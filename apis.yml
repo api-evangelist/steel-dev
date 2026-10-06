@@ -51,7 +51,7 @@ tags_raw:
 - Open-Source
 - Browser Automation
 created: '2026-06-20'
-modified: '2026-06-20'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: steel-dev:steel-dev-files-api
@@ -153,6 +153,8 @@ apis:
   - type: Review
     url: review.yml
 common:
+- url: https://steel.dev/blog
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/steel-dev-agentic-access.yml
 - type: DomainSecurity
