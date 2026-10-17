@@ -181,24 +181,6 @@ components:
               $ref: '#/components/schemas/Dimensions'
             pageCount:
               type: integer
-    SessionContext:
-      type: object
-      description: Captured browser state for the session.
-      properties:
-        cookies:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        localStorage:
-          type: object
-          additionalProperties: true
-        sessionStorage:
-          type: object
-          additionalProperties: true
-        indexedDB:
-          type: object
-          additionalProperties: true
     CreateSession:
       type: object
       description: Options for launching a browser session.
@@ -282,6 +264,31 @@ components:
         isSelenium:
           type: boolean
           description: Indicates if the session is driven over Selenium.
+    ReleaseSession:
+      allOf:
+      - $ref: '#/components/schemas/SessionDetails'
+      - type: object
+        properties:
+          success:
+            type: boolean
+    SessionContext:
+      type: object
+      description: Captured browser state for the session.
+      properties:
+        cookies:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        localStorage:
+          type: object
+          additionalProperties: true
+        sessionStorage:
+          type: object
+          additionalProperties: true
+        indexedDB:
+          type: object
+          additionalProperties: true
     Dimensions:
       type: object
       properties:
@@ -347,13 +354,6 @@ components:
           type: boolean
         isSelenium:
           type: boolean
-    ReleaseSession:
-      allOf:
-      - $ref: '#/components/schemas/SessionDetails'
-      - type: object
-        properties:
-          success:
-            type: boolean
   parameters:
     SessionId:
       name: sessionId
